@@ -4,6 +4,7 @@ const { makeTest, suite } = require('./utility/testLib.js');
 const {
   openingTag,
   closingTag,
+  stringifyStyle,
   stringifyAttributes
 } = require('../src/helpers.js');
 
@@ -39,6 +40,27 @@ suite(
 );
 
 suite(
+  'stringifyStyle',
+  makeTest(
+    'style with properties',
+    () => {
+      const style = {
+        font: 'Arial',
+        color: 'red'
+      };
+      strictEqual(stringifyStyle(style), 'font:Arial;color:red;');
+    }
+  ),
+  makeTest(
+    'style with no property',
+    () => {
+      const style = {};
+      strictEqual(stringifyStyle(style), '');
+    }
+  )
+);
+
+suite(
   'stringifyAttributes',
   makeTest(
     'Without style attribute',
@@ -56,7 +78,7 @@ suite(
       const attr = {
         class: 'some-class',
         style: {
-          font: "Arial"
+          font: 'Arial'
         }
       };
       strictEqual(stringifyAttributes(attr), 'class="some-class" style="font:Arial;"');
