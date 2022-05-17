@@ -5,7 +5,9 @@ const {
   openingTag,
   closingTag,
   stringifyStyle,
-  stringifyAttributes
+  stringifyAttributes,
+  isSelfClosing,
+  selfClosingTagHtml
 } = require('../src/helpers.js');
 
 suite(
@@ -83,5 +85,17 @@ suite(
       };
       strictEqual(stringifyAttributes(attr), 'class="some-class" style="font:Arial;"');
     }
+  )
+);
+
+suite(
+  'isSelfClosing',
+  makeTest(
+    'Self closing tag',
+    () => strictEqual(isSelfClosing('img'), true)
+  ),
+  makeTest(
+    'Paired tag',
+    () => strictEqual(isSelfClosing('div'), false)
   )
 );

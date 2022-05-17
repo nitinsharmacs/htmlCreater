@@ -23,7 +23,18 @@ const stringifyAttributes = (attrs) => {
   return Object.entries(attrs).map(stringifyAttribute).join(' ');
 };
 
+const isSelfClosing = (tag) => {
+  const selfClosingTags = ['img', 'link', 'hr', 'br'];
+  return selfClosingTags.includes(tag);
+};
+
+const selfClosingTagHtml = (tag, attrs) => {
+  return '<' + tag + ' ' + stringifyAttributes(attrs) + ' />';
+};
+
 exports.openingTag = openingTag;
 exports.closingTag = closingTag;
 exports.stringifyStyle = stringifyStyle;
 exports.stringifyAttributes = stringifyAttributes;
+exports.isSelfClosing = isSelfClosing;
+exports.selfClosingTagHtml = selfClosingTagHtml;

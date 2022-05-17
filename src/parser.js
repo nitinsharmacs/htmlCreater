@@ -1,17 +1,10 @@
 const {
   openingTag,
   closingTag,
-  stringifyAttributes
+  stringifyAttributes,
+  isSelfClosing,
+  selfClosingTagHtml
 } = require('./helpers.js');
-
-const isSelfClosing = (tag) => {
-  const selfClosingTags = ['img', 'link', 'hr', 'br'];
-  return selfClosingTags.includes(tag);
-};
-
-const selfClosingTagHtml = (tag, attrs) => {
-  return '<' + tag + ' ' + stringifyAttributes(attrs) + ' />';
-};
 
 const html = ([tag, attrs, contents]) => {
   if (isSelfClosing(tag)) {
