@@ -1,4 +1,4 @@
-const { strictEqual } = require('assert');
+const { strictEqual, strict } = require('assert');
 const { makeTest, suite } = require('./utility/testLib.js');
 
 const {
@@ -97,5 +97,26 @@ suite(
   makeTest(
     'Paired tag',
     () => strictEqual(isSelfClosing('div'), false)
+  )
+);
+
+suite(
+  'selfClosingHtml',
+  makeTest(
+    'With attributes',
+    () => {
+      const attrs = {
+        src: "1.jpg",
+        alt: "img"
+      };
+      strictEqual(selfClosingTagHtml('img', attrs), '<img src="1.jpg" alt="img" />')
+    }
+  ),
+  makeTest(
+    'Without attributes',
+    () => {
+      const attrs = {};
+      strictEqual(selfClosingTagHtml('br', attrs), '<br  />')
+    }
   )
 );
