@@ -6,6 +6,8 @@ const {
   selfClosingTagHtml
 } = require('./helpers.js');
 
+const isArray = Array.isArray;
+
 const html = ([tag, attrs, contents]) => {
   if (isSelfClosing(tag)) {
     return selfClosingTagHtml(tag, attrs);
